@@ -1,14 +1,29 @@
 ﻿using UnityEngine;
 
-public class MapGenerator : MonoBehaviour {
+public class MapGenerator : MonoBehaviour
+{
+
+    private int[,] world = new int[10, 10]
+    {
+        { 1, 1, 1, 1, 0, 1, 1, 1, 1, 1 },
+        { 0, 0, 0, 1, 0, 1, 1, 1, 1, 1 },
+        { 1, 1, 1, 1, 0, 0, 0, 0, 1, 1 },
+        { 1, 1, 0, 1, 1, 1, 1, 0, 1, 1 },
+        { 1, 1, 0, 0, 0, 0, 0, 0, 1, 1 },
+        { 1, 1, 1, 0, 0, 1, 1, 1, 1, 1 },
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    };
 
     // Prefab used to build hex grid
     public GameObject Hex;
 
     // Number of hexes wide and tall the map is
     // This is not the world space
-    int mapHeight = 20;
-    int mapWidth = 20;
+    int mapHeight = 10;
+    int mapWidth = 10;
 
     // How much space in world units to move each individual hex
     float offsetX = 0.9f;
@@ -42,8 +57,8 @@ public class MapGenerator : MonoBehaviour {
                 Hex hex = hex_go.GetComponent<Hex>();
                 hex.x = x;
                 hex.y = z;
-                hex.walkable = Random.Range(0.0f, 1.0f) < 0.8f;
-                hex.GetComponentInChildren<MeshRenderer>().material.color = (hex.walkable) ? Color.white: Color.black;
+                hex.walkable = world[x, z] == 1;
+                hex.GetComponentInChildren<MeshRenderer>().material.color = (hex.walkable) ? Color.white : Color.black;
                 hex.setupNeighbors();
             }
         }
