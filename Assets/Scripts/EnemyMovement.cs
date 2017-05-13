@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour {
+public class EnemyMovement : MonoBehaviour {
 
     private Hex currentHex;
     private Vector3 targetPosition;
@@ -8,13 +8,13 @@ public class CharacterMovement : MonoBehaviour {
 
 	void Start () {
 
-        targetPosition = this.transform.position;
-
         EventManager.Listen("Map Generated", (int x, int y) =>
         {
             // initializes currentHex with the child of the bottom leftmost hex on the grid.
-            currentHex = GameObject.Find("Hex_0_0").GetComponent<Hex>();
-            currentHex.GetComponent<Hex>().targetColor = Color.red;
+            currentHex = GameObject.Find("Hex_2_1").GetComponent<Hex>();
+            this.transform.position = currentHex.transform.position;
+            targetPosition = this.transform.position;
+            currentHex.GetComponent<Hex>().GetComponentInChildren<MeshRenderer>().material.color = Color.blue;
         });
 
         // Listening for a hex to be clicked, taking the data passed with that event
@@ -30,14 +30,14 @@ public class CharacterMovement : MonoBehaviour {
             {
                 // set new current hex
                 // Set the player to the center of that selected hex
-                currentHex.GetComponent<Hex>().targetColor = Color.white;
+                currentHex.GetComponent<Hex>().GetComponentInChildren<MeshRenderer>().material.color = Color.white;
 
                 // Set target position to the selected hex's position
                 currentHex = selected.GetComponent<Hex>();
                 Vector3 pos = selected.transform.position;
                 targetPosition = new Vector3(pos.x, pos.y + 0.25f, pos.z);
 
-                selected.GetComponent<Hex>().targetColor = Color.red;
+                selected.GetComponent<Hex>().GetComponentInChildren<MeshRenderer>().material.color = Color.blue;
             }
         });
 	}

@@ -7,7 +7,21 @@ public class Hex : MonoBehaviour {
     public int y;
     public bool walkable = true;
     public List<GameObject> neighbors;
-
+    public Color currentColor;
+    public Color targetColor;
+    public void Start()
+    {
+        this.currentColor = (this.walkable) ? Color.white : Color.black;
+        this.targetColor = this.currentColor;
+    }
+    public void Update()
+    {
+        if(this.targetColor != this.currentColor)
+        {
+            this.currentColor = Color.Lerp(this.currentColor, this.targetColor, Time.deltaTime * 5f);
+        }
+        this.GetComponentInChildren<MeshRenderer>().material.color = this.currentColor;
+    }
     // Create the neighbors. The math for "down left" and such are 
     // kind of magic but they're above each neighbors.add call
     public void setupNeighbors()
