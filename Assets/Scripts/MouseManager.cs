@@ -16,18 +16,8 @@ public class MouseManager : MonoBehaviour
             Transform selected = hitInfo.collider.gameObject.transform.parent;
             if (Input.GetMouseButtonUp(0))
             {
-                List<GameObject> neighbors = selected.GetComponent<Hex>().neighbors;
-                for (int i = 0; i < neighbors.Count; ++i)
-                {
-                    if (neighbors[i].GetComponentInChildren<MeshRenderer>().material.color == Color.red)
-                    {
-                        neighbors[i].GetComponentInChildren<MeshRenderer>().material.color = Color.white;
-                    }
-                    else
-                    {
-                        neighbors[i].GetComponentInChildren<MeshRenderer>().material.color = Color.red;
-                    }
-                }
+                Hex hex = selected.GetComponent<Hex>();
+                EventManager.Broadcast("Hex Clicked", hex.x, hex.y);
             }
         }
     }
