@@ -5,6 +5,7 @@ public class Hex : MonoBehaviour {
 
     public int x;
     public int y;
+    public bool walkable = true;
     public List<GameObject> neighbors;
 
     // Create the neighbors. The math for "down left" and such are 

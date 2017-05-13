@@ -42,6 +42,8 @@ public class MapGenerator : MonoBehaviour {
                 Hex hex = hex_go.GetComponent<Hex>();
                 hex.x = x;
                 hex.y = z;
+                hex.walkable = Random.Range(0.0f, 1.0f) < 0.8f;
+                hex.GetComponentInChildren<MeshRenderer>().material.color = (hex.walkable) ? Color.white: Color.black;
                 hex.setupNeighbors();
             }
         }

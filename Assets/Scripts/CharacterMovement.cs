@@ -21,7 +21,7 @@ public class CharacterMovement : MonoBehaviour {
             GameObject selected = GameObject.Find("Hex_" + x + "_" + y);
 
             // if selected hex is a neighbor of the current hex
-            if (currentHex.neighbors.Contains(selected))
+            if (currentHex.neighbors.Contains(selected) && selected.GetComponent<Hex>().walkable)
             {
                 // set new current hex
                 // Set the player to the center of that selected hex
