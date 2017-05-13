@@ -35,6 +35,7 @@ public class MapGenerator : MonoBehaviour {
                 hex.setupNeighbors();
             }
         }
+        EventManager.Broadcast("Map Generated", -1, -1);
     }
 
     private Vector3 calculatePosition(int x, int z)
