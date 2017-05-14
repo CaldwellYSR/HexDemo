@@ -1,12 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour {
+public class CharacterMovement : MonoBehaviour
+{
 
     private Hex currentHex;
     private Vector3 targetPosition;
     public float speed = 10f;
+    private List<Hex> path = new List<Hex>();
 
-	void Start () {
+    void Start()
+    {
 
         targetPosition = this.transform.position;
 
@@ -26,7 +30,7 @@ public class CharacterMovement : MonoBehaviour {
 
             AStarPathFinder aStar = new AStarPathFinder(this.currentHex, selected.GetComponent<Hex>());
 
-            Debug.Log(aStar.hexHScore(this.currentHex));
+            path = aStar.getPath();
 
             /*
             // if selected hex is a neighbor of the current hex
@@ -45,13 +49,16 @@ public class CharacterMovement : MonoBehaviour {
             }
             */
         });
-	}
+    }
     public void Update()
     {
-
-        // If target position has changed we need to incrimentally move towards
-        // the new target position
-        if (targetPosition != this.transform.position)
+        if (path.Count > 0 && targetPosition == this.transform.position)
+        {
+            Vector3 pos = path[0].transform.position;
+            path.RemoveAt(0);
+            targetPosition = new Vector3(pos.x, pos.y + 0.25f, pos.z);
+        }
+        else
         {
             this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, Time.deltaTime * speed);
         }

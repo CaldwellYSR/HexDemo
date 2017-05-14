@@ -18,10 +18,17 @@ public class AStarPathFinder {
         this.currentHex = currentHex;
         this.targetHex = targetHex;
         open.Add(currentHex);
+    }
+
+    public List<Hex> getPath()
+    {
         while (!open.Contains(targetHex))
         {
             this.findPath();
         }
+        closed.Remove(currentHex);
+        closed.Add(targetHex);
+        return closed;
     }
 
     private void findPath()
@@ -36,7 +43,15 @@ public class AStarPathFinder {
         // Loop through neighbors and all all walkable hexes to the open list
         foreach (GameObject go in hex.neighbors)
         {
+            if (go == null)
+            {
+                continue;
+            }
             Hex h = go.GetComponent<Hex>();
+            if (closed.Contains(h))
+            {
+                continue;
+            }
             if (h.walkable)
             {
                 h.parent = hex; 
