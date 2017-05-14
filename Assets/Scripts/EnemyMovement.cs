@@ -12,7 +12,8 @@ public class EnemyMovement : MonoBehaviour {
         {
             // initializes currentHex with the child of the bottom leftmost hex on the grid.
             currentHex = GameObject.Find("Hex_2_1").GetComponent<Hex>();
-            this.transform.position = currentHex.transform.position;
+            Vector3 pos = currentHex.transform.position;
+            this.transform.position = new Vector3(pos.x, pos.y + 0.25f, pos.z);
             targetPosition = this.transform.position;
             currentHex.GetComponent<Hex>().GetComponentInChildren<MeshRenderer>().material.color = Color.blue;
         });

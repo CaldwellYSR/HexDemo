@@ -20,11 +20,15 @@ public class CharacterMovement : MonoBehaviour {
         // Listening for a hex to be clicked, taking the data passed with that event
         EventManager.Listen("Hex Clicked", (int x, int y) =>
         {
-            //
-            
+
             // finds the hex object at the given coordinates by creating the name from the coordinates
             GameObject selected = GameObject.Find("Hex_" + x + "_" + y);
 
+            AStarPathFinder aStar = new AStarPathFinder(this.currentHex, selected.GetComponent<Hex>());
+
+            Debug.Log(aStar.hexHScore(this.currentHex));
+
+            /*
             // if selected hex is a neighbor of the current hex
             if (currentHex.neighbors.Contains(selected) && selected.GetComponent<Hex>().walkable)
             {
@@ -39,6 +43,7 @@ public class CharacterMovement : MonoBehaviour {
 
                 selected.GetComponent<Hex>().targetColor = Color.red;
             }
+            */
         });
 	}
     public void Update()
