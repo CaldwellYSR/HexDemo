@@ -24,23 +24,33 @@ public class CharacterMovement : MonoBehaviour {
             
             // finds the hex object at the given coordinates by creating the name from the coordinates
             GameObject selected = GameObject.Find("Hex_" + x + "_" + y);
-
-            // if selected hex is a neighbor of the current hex
-            if (currentHex.neighbors.Contains(selected) && selected.GetComponent<Hex>().walkable)
+            // if selected hex is a neighbor of the current hex and it is not occupied
+            if (currentHex.neighbors.Contains(selected) && selected.GetComponent<Hex>().walkable && !selected.GetComponent<Hex>().occupied)
             {
                 // set new current hex
                 // Set the player to the center of that selected hex
-                currentHex.GetComponent<Hex>().targetColor = Color.white;
+                this.ExitHex(currentHex);
 
                 // Set target position to the selected hex's position
                 currentHex = selected.GetComponent<Hex>();
+                this.EnterHex(currentHex);
                 Vector3 pos = selected.transform.position;
                 targetPosition = new Vector3(pos.x, pos.y + 0.25f, pos.z);
 
-                selected.GetComponent<Hex>().targetColor = Color.red;
+               
             }
         });
 	}
+    public void ExitHex(Hex hex)
+    {
+        hex.occupied = false;
+        hex.GetComponent<Hex>().targetColor = Color.white;
+    }
+    public void EnterHex(Hex hex)
+    {
+        hex.occupied = true;
+        hex.targetColor = Color.red;
+    }
     public void Update()
     {
 

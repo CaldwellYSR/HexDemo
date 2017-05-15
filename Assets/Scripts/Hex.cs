@@ -6,9 +6,13 @@ public class Hex : MonoBehaviour {
     public int x;
     public int y;
     public bool walkable = true;
+    public bool occupied;
     public List<GameObject> neighbors;
     public Color currentColor;
     public Color targetColor;
+    //the hex that the player starts on
+    public bool dungeonEntrance;
+  
     public void Start()
     {
         this.currentColor = (this.walkable) ? Color.white : Color.black;
