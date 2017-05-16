@@ -1,13 +1,13 @@
 fileFormatVersion: 2
 guid: 7acd57af79b216b4b8fb83a7a207cfe0
-timeCreated: 1494805041
+timeCreated: 1494892527
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - Enemy: {fileID: 1760978094088826, guid: f21c51c6772fe524b8a7337e215c3525, type: 2}
   - Hex: {fileID: 1070157309576640, guid: c132a272c27d29c43aff1b2c12a937da, type: 2}
-  executionOrder: 300
+  executionOrder: 0
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 

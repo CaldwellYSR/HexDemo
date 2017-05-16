@@ -10,12 +10,12 @@ public class CharacterMovement : MonoBehaviour {
 
         targetPosition = this.transform.position;
 
-        EventManager.Listen("Map Generated", (int x, int y) =>
-        {
+
+            print("Character is placed, running movement code");
             // initializes currentHex with the child of the bottom leftmost hex on the grid.
             currentHex = GameObject.Find("Hex_0_0").GetComponent<Hex>();
             currentHex.GetComponent<Hex>().targetColor = Color.red;
-        });
+
 
         // Listening for a hex to be clicked, taking the data passed with that event
         EventManager.Listen("Hex Clicked", (int x, int y) =>

@@ -14,6 +14,7 @@ public class EnemyPlacer : MonoBehaviour {
 
         EventManager.Listen("Map Generated", (int x, int y) =>
         {
+            print("Map generated, placing enemies");
             Hex[] hexes = GameObject.FindObjectsOfType<Hex>();
             print(hexes.Length);
             for (int j = 0; j < numberToPlace; j++)
