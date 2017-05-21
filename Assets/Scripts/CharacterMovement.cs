@@ -55,6 +55,7 @@ public class CharacterMovement : MonoBehaviour
         if (path.Count > 0 && targetPosition == this.transform.position)
         {
             Vector3 pos = path[0].transform.position;
+            currentHex = path[0];
             path.RemoveAt(0);
             targetPosition = new Vector3(pos.x, pos.y + 0.25f, pos.z);
         }

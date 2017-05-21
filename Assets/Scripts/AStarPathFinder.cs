@@ -40,15 +40,11 @@ public class AStarPathFinder {
         open.RemoveAt(0);
         closed.Add(hex);
 
-        // Loop through neighbors and all all walkable hexes to the open list
+        // Loop through neighbors and put all walkable hexes to the open list
         foreach (GameObject go in hex.neighbors)
         {
-            if (go == null)
-            {
-                continue;
-            }
             Hex h = go.GetComponent<Hex>();
-            if (closed.Contains(h))
+            if (go == null || closed.Contains(h))
             {
                 continue;
             }
@@ -75,12 +71,8 @@ public class AStarPathFinder {
         return hexGScore(hex) + hexHScore(hex);
     }
 
-    // TODO: Determine if G score is always 1 or not
-    //
-    // G Score will usually be 1 since moving from the center of 1 hex to
-    // the center of the next hex is just one unit regardless of direction
-    // If we were using squares instead of hexes this would need some more 
-    // math to handle diagonal movement being a longer distance to travel
+    // G Score is the number of hexes from the starting hex to this hex
+    // using the selected path
     private int hexGScore(Hex hex)
     {
         return 1;
